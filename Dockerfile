@@ -1,4 +1,4 @@
-FROM node:14
+FROM 523053920005.dkr.ecr.us-east-1.amazonaws.com/node:14
 
 # Setting working directory. All the path will be relative to WORKDIR
 WORKDIR /usr/src/app
