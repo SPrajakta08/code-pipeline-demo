@@ -10,8 +10,8 @@ phases:
       - echo Logging in to Amazon ECR....
       # Verify AWS CLI Version   
       - aws --version
-      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 523053920005.dkr.ecr.ap-south-1.amazonaws.com
-      - REPOSITORY_URI=523053920005.dkr.ecr.ap-south-1.amazonaws.com/cicd-demo
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 523053920005.dkr.ecr.us-east-1.amazonaws.com
+      - REPOSITORY_URI=523053920005.dkr.ecr.us-east-1.amazonaws.com/nodejs
       - IMAGE_TAG=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       # Update Image tag in our Kubernetes Deployment Manifest        
       - echo "Update Image tag in kube-manifest..."
@@ -52,6 +52,6 @@ phases:
       #- echo "AWS_EXPIRATION...  $AWS_EXPIRATION"             
       #- echo "EKS_CLUSTER_NAME...  $EKS_CLUSTER_NAME"             
       - echo Writing image definitions file...
-      - printf '[{"name":"cicd-demo","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name":"eks-jenkins","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 artifacts:
     files: imagedefinitions.json
